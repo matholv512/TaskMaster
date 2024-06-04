@@ -1,5 +1,6 @@
 import formatDate from './formatDate';
 import Filter from './Filter';
+import SearchFilter from './SearchFilter';
 export default class Pagination {
     constructor() {
         this.pagination = document.querySelector('.pagination');
@@ -10,6 +11,8 @@ export default class Pagination {
         this.filter = new Filter();
         this.filter.init();
         this.tasks = this.filter.getFilteredTasks();
+        this.searchFilter = new SearchFilter();
+        this.searchFilter.init();
         this.numberOfPageLinks = Math.ceil(Number(this.tasks.length / this.itemsPerPage));
     }
 
@@ -42,6 +45,16 @@ export default class Pagination {
             const element = e.target;
             if (element.classList.contains('page-link')) {
                 this.index = element.innerText;
+                this.filterContent();
+            }
+        });
+
+        document.addEventListener('searchFilterStart', () => {
+            if (this.searchFilter.getResearchedTasks()) {
+                this.tasks = this.searchFilter.getResearchedTasks();
+                this.numberOfPageLinks = Math.ceil(Number(this.tasks.length / this.itemsPerPage));
+                this.index = 1;
+                this.createPagination();
                 this.filterContent();
             }
         });

@@ -3,7 +3,7 @@ export default class FilterContent {
         this.select = document.querySelector('select[name="filter"]');
         this.tasks = document.querySelectorAll('.list-group-item');
         this.filteredTasks = Array.from(this.tasks);
-        this.filterSpan = document.querySelector('.filter-span')
+        this.filterSpan = document.querySelector('.filter-span');
     }
 
     init() {

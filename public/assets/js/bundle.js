@@ -293,6 +293,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _formatDate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./formatDate */ "./frontend/modules/formatDate.js");
 /* harmony import */ var _Filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Filter */ "./frontend/modules/Filter.js");
+/* harmony import */ var _SearchFilter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SearchFilter */ "./frontend/modules/SearchFilter.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -302,6 +303,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
 
 
 var Pagination = /*#__PURE__*/function () {
@@ -315,6 +317,8 @@ var Pagination = /*#__PURE__*/function () {
     this.filter = new _Filter__WEBPACK_IMPORTED_MODULE_1__["default"]();
     this.filter.init();
     this.tasks = this.filter.getFilteredTasks();
+    this.searchFilter = new _SearchFilter__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    this.searchFilter.init();
     this.numberOfPageLinks = Math.ceil(Number(this.tasks.length / this.itemsPerPage));
   }
   return _createClass(Pagination, [{
@@ -348,6 +352,15 @@ var Pagination = /*#__PURE__*/function () {
         var element = e.target;
         if (element.classList.contains('page-link')) {
           _this.index = element.innerText;
+          _this.filterContent();
+        }
+      });
+      document.addEventListener('searchFilterStart', function () {
+        if (_this.searchFilter.getResearchedTasks()) {
+          _this.tasks = _this.searchFilter.getResearchedTasks();
+          _this.numberOfPageLinks = Math.ceil(Number(_this.tasks.length / _this.itemsPerPage));
+          _this.index = 1;
+          _this.createPagination();
           _this.filterContent();
         }
       });
@@ -435,6 +448,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ SearchFilter)
 /* harmony export */ });
+/* harmony import */ var _Filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Filter */ "./frontend/modules/Filter.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -444,10 +458,13 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
 var SearchFilter = /*#__PURE__*/function () {
   function SearchFilter() {
     _classCallCheck(this, SearchFilter);
     this.tasks = document.querySelectorAll('.list-group-item');
+    this.filter = new _Filter__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    this.filter.init();
   }
   return _createClass(SearchFilter, [{
     key: "init",
@@ -455,28 +472,58 @@ var SearchFilter = /*#__PURE__*/function () {
       var _this = this;
       document.addEventListener('input', function (e) {
         var element = e.target;
-        if (element.classList.contains('search-input')) _this.filterContent(element.value);
+        if (element.classList.contains('search-input')) {
+          _this.filterContent(element.value);
+          document.dispatchEvent(new CustomEvent('searchFilterStart'));
+        }
       });
     }
   }, {
     key: "filterContent",
     value: function filterContent(searchValue) {
-      var _iterator = _createForOfIteratorHelper(this.tasks),
-        _step;
+      this.researchedTasks = [];
+      if (this.filter.getFilteredTasks()) {
+        var _iterator = _createForOfIteratorHelper(this.filter.getFilteredTasks()),
+          _step;
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var task = _step.value;
+            if (task.dataset.taskTitle.toLowerCase().includes(searchValue.toLowerCase())) {
+              task.style.display = 'block';
+              this.researchedTasks.push(task);
+            } else {
+              task.style.display = 'none';
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+        return;
+      }
+      var _iterator2 = _createForOfIteratorHelper(this.tasks),
+        _step2;
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var task = _step.value;
-          if (task.dataset.taskTitle.toLowerCase().includes(searchValue.toLowerCase())) {
-            task.style.display = 'block';
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _task = _step2.value;
+          if (_task.dataset.taskTitle.toLowerCase().includes(searchValue.toLowerCase())) {
+            _task.style.display = 'block';
+            this.researchedTasks.push(_task);
           } else {
-            task.style.display = 'none';
+            _task.style.display = 'none';
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator.f();
+        _iterator2.f();
       }
+    }
+  }, {
+    key: "getResearchedTasks",
+    value: function getResearchedTasks() {
+      return this.researchedTasks;
     }
   }]);
 }();
