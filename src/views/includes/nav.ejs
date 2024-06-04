@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: #141A21">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img class="rounded" src="/assets/img/logo/logo-1.svg" alt="TaskMaster-logo" width="100px" height="50px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <% if (user) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/create_task">Criar Tarefa</a>
+                    </li>
+                <% } else { %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Funcionalidades
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Funcionalidade 1</a></li>
+                            <li><a class="dropdown-item" href="#">Funcionalidade 2</a></li>
+                            <li><a class="dropdown-item" href="#">Funcionalidade 3</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Sobre</a>
+                    </li>
+                <% } %>
+            </ul>
+            <% if (!user) { %>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/login">Iniciar Sessão</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/register">Registrar-se</a>
+                    </li>
+                </ul>
+            <% } %>
+
+            <% if (user) { %>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/logout">Sair</a>
+                    </li>
+                </ul>
+            <% } %>
+        </div>
+    </div>
+</nav>

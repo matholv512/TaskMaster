@@ -1,0 +1,17 @@
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: rgb(247, 247, 247);">
+          <h5 class="modal-title">Excluir tarefa</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Você realmente deseja excluir essa tarefa?</p>
+        </div>
+        <div class="modal-footer" style="background-color: rgb(247, 247, 247);">
+          <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancelar</button>
+          <a href="/delete_task/<%= task._id %>"><button type="button" class="btn btn-danger">Excluir</button></a>
+        </div>
+      </div>
+    </div>
+  </div>

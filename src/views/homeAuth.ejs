@@ -1,0 +1,97 @@
+<%- include('includes/head'); %>
+    <%- include('includes/nav'); %>
+        <div class="container">
+            <div class="row">
+                <div class="my-5 min-vh-100">
+                    <%- include('includes/messages') %>
+                        <div class="card">
+                            <div class="card-body border">
+                                <% if (currentHour>= 6 && currentHour <= 12) { %>
+                                        <h5 class="card-text"><span class="text-secondary">Bom dia,</span
+                                                class="username">
+                                            <%= user && user.username %>.
+                                        </h5>
+                                        <% } else if (currentHour> 12 && currentHour < 18) { %>
+                                                <h5 class="card-text"><span class="text-secondary">Boa tarde,</span
+                                                        class="username">
+                                                    <%= user && user.username %>.
+                                                </h5>
+                                                <% } else {%>
+                                                    <h5 class="card-text"><span class="text-secondary">Boa noite,</span
+                                                            class="username">
+                                                        <%= user && user.username %>.
+                                                    </h5>
+                                                    <% } %>
+                                                        <h2 class="card-text text-primary">
+                                                            <%= currentDate %>
+                                                        </h2>
+                            </div>
+                        </div>
+                        <div class="mt-5">
+                            <% if (tasks.length> 0) { %>
+                                <h1 class="text-center my-3">Lista de Tarefas</h1>
+                                <div class="d-flex justify-content-end">
+                                    <input type="text" class="search-input form-control w-25 me-1"
+                                        placeholder="Pesquisar" name="search">
+                                    <%- include('includes/filter'); %>
+                                </div>
+                                <% } %>
+                        </div>
+
+                        <%- include('includes/filterModal'); %>
+
+                            <% if (tasks.length> 0) { %>
+                                <% for (let task of tasks) { %>
+                                    <div class="list-group my-1 border min-vh-100"
+                                        style="background-color: rgb(247, 247, 247);">
+                                        <a href='/edit_task/<%= task._id %>'
+                                            class="list-group-item list-group-item-action" aria-current="true"
+                                            data-task-id="<%= task.id %>" data-task-title="<%= task.title %>"
+                                            data-task-priority="<%= task.priority %>"
+                                            data-task-finalDate="<%= task.finalDate %>">
+                                            <div class="w-100 p-1">
+                                                <h4>
+                                                    <%= task.title %>
+                                                </h4>
+                                                <div class="d-flex justify-content-end">
+                                                    <% if (task.priority==='Baixa' ) { %>
+                                                        <small class="mx-2"><span
+                                                                class="badge text-bg-success rounded-pill"
+                                                                style="width: 50px; height: 20px;">
+                                                                <%= task.priority %>
+                                                            </span></small>
+                                                        <% } else if (task.priority==='Média' ) { %>
+                                                            <small class="mx-2"><span
+                                                                    class="badge text-bg-warning rounded-pill"
+                                                                    style="width: 50px; height: 20px;">
+                                                                    <%= task.priority %>
+                                                                </span></small>
+                                                            <% } else { %>
+                                                                <small class="mx-2"><span
+                                                                        class="badge text-bg-danger rounded-pill"
+                                                                        style="width: 50px; height: 20px;">
+                                                                        <%= task.priority %>
+                                                                    </span></small>
+                                                                <% } %>
+                                                </div>
+                                                <small class="finalDate">
+                                                    <%= task.finalDate %>
+                                                </small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <% } %>
+                                        <% } else { %>
+                                            <div class="border rounded p-4"
+                                                style="background-color: rgb(247, 247, 247);">
+                                                <h1 class="text-center">Você ainda não possui nenhuma tarefa.</h1>
+                                                <div class="d-flex justify-content-center mt-3">
+                                                    <a href="/create_task"><button type="button"
+                                                            class="btn btn-primary">Criar</button></a>
+                                                </div>
+                                            </div>
+                                            <% } %>
+                                                <%- include('includes/pagination'); %>
+                </div>
+                <%- include('includes/footer'); %>
+            </div>

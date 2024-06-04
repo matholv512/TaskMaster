@@ -1,0 +1,60 @@
+<%- include('includes/head'); %>
+    <%- include('includes/nav'); %>
+        <div class="container-sm mx-auto vh-100">
+            <div class="row justify-content-center">
+                <div class="col-4 my-5 border rounded p-4 w-50" style="background-color: rgb(247, 247, 247);">
+                    <div>
+                        <h1 class="text-center">Editar Tarefa</h1>
+                        <p class="text-center lead">Edite a tarefa abaixo:</p>
+                        <%- include('includes/messages'); %>
+                            <%- include('includes/modal'); %>
+                                <form class="task-form-validation" action="/edit_task/<%= task._id %>" method="post">
+                                    <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Título</label>
+                                        <input type="text" class="form-control" name="title" value="<%= task.title %>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Descrição</label>
+                                        <textarea type="text" class="form-control" name="description"
+                                            style="height: 100px;"><%= task.description %></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="floatingSelect" class="form-label">Prioridade</label>
+                                        <select class="form-select" id="floatingSelect" name="priority"
+                                            aria-label="Floating label select example">
+                                            <% if (task.priority === 'Baixa' ) { %>
+                                                <option selected value="Baixa">Baixa</option>
+                                                <option value="Média">Média</option>
+                                                <option value="Alta">Alta</option>
+                                                <% } else if (task.priority === 'Média' ) { %>
+                                                    <option value="Baixa">Baixa</option>
+                                                    <option selected value="Média">Média</option>
+                                                    <option value="Alta">Alta</option>
+                                                    <% } else { %>
+                                                        <option value="Baixa">Baixa</option>
+                                                        <option value="Média">Média</option>
+                                                        <option selected value="Alta">Alta</option>
+                                                        <% } %>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="finalDate" class="form-label">Data final</label>
+                                        <input type="datetime-local" class="form-control" name="finalDate"
+                                            value="<%= task.finalDate %>">
+                                    </div>
+
+                                    <div class="text-center my-2">
+                                        <button type="submit" class="btn btn-primary">Editar</button>
+                                        <a href="/"><button type="button" class="btn btn-dark">Cancelar</button></a>
+                                        <button type="button" class="btn btn-danger btn-del-modal"
+                                            data-bs-toggle="modal" data-bs-target=".modal">Excluir</button>
+                                    </div>
+                                </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('includes/footer'); %>

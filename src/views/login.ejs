@@ -1,0 +1,36 @@
+<%- include('includes/head') %>
+    <%- include('includes/nav'); %>
+        <div class="container-fluid min-vh-100">
+            <div class="row justify-content-center">
+                <div class="col-3 mt-5 pb-3 border rounded p-4" style="background-color: rgb(247, 247, 247);">
+                    <div>
+                        <h1 class="text-center">Entrar</h1>
+                        <p class="text-center lead">Se você já possui uma conta, logue-se abaixo:</p>
+                            <%- include('includes/messages'); %>
+                            <form class="login-form-validation" action="/login" method="post">
+                                <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" name="password" required>
+                                </div>
+
+                                <div class="text-center mt-2">
+                                    <button type="submit" class="btn btn-primary">Entrar</button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <p>Ainda não possui uma conta? <a href="/register"
+                            class="text-primary text-decoration-none">Registrar-se</a></p>
+                    <p>Esqueceu sua senha? <a href="#" class="text-primary text-decoration-none">Resetar
+                            senha</a></p>
+                </div>
+            </div>
+        </div>
+
+        <%- include('includes/footer') %>

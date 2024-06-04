@@ -1,0 +1,47 @@
+<%- include('includes/head'); %>
+    <%- include('includes/nav'); %>
+        <div class="container-sm mx-auto vh-100">
+            <div class="row justify-content-center">
+                <div class="col-4 my-5 border rounded p-4 w-50" style="background-color: rgb(247, 247, 247);">
+                    <div>
+                        <h1 class="text-center">Criar Tarefa</h1>
+                        <p class="text-center lead">Crie uma nova tarefa abaixo:</p>
+                        <%- include('includes/messages'); %>
+                            <form class="task-form-validation" action="/create_task" method="post">
+                                <input type="hidden" name="_csrf" value=<%=csrfToken %>>
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Título</label>
+                                    <input type="text" class="form-control" name="title" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Descrição</label>
+                                    <textarea type="text" class="form-control" name="description"
+                                        style="height: 100px;"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="floatingSelect" class="form-label">Prioridade</label>
+                                    <select class="form-select" id="floatingSelect" name="priority"
+                                        aria-label="Floating label select example" required>
+                                        <option value="Baixa">Baixa</option>
+                                        <option value="Média">Média</option>
+                                        <option value="Alta">Alta</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="finalDate" class="form-label">Data final</label>
+                                    <input type="datetime-local" class="form-control" name="finalDate"
+                                        min="1000-01-01T00:00" max="9999-12-31T23:59" required>
+                                </div>
+
+                                <div class="text-center my-2">
+                                    <button type="submit" class="btn btn-primary">Criar</button>
+                                    <a href="/"><button type="button" class="btn btn-dark">Cancelar</button></a>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('includes/footer'); %>
