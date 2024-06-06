@@ -1,30 +1,34 @@
 <% if (errors.length> 0) { %>
-  <div class="row alertRow">
-    <div class="col my-3">
-      <div class="progress mx-1" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="height: 1px">
-        <div class="progress-bar bg-danger"></div>
-      </div>
-      <div class="alert alert-danger d-flex justify-content-between">
-        <% errors.forEach(error=> { %>
-          <%= error %><br>
-            <% }); %>
-            <button class="btn-close removeMessage"></button>
+  <div class="col-4 fixed-top-right">
+    <div class="row alertRow">
+      <div class="col my-3">
+        <div class="progress mx-1" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="height: 1px">
+          <div class="progress-bar bg-danger"></div>
+        </div>
+        <div class="alert alert-danger d-flex justify-content-between">
+          <% errors.forEach(error=> { %>
+            <%= error %><br>
+              <% }); %>
+                <button class="btn-close removeMessage"></button>
+        </div>
       </div>
     </div>
   </div>
   <% } %>
 
     <% if (success.length> 0) { %>
-      <div class="row alertRow">
-        <div class="col my-3">
-          <div class="progress mx-1" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="height: 1px">
-            <div class="progress-bar bg-success"></div>
-          </div>
-          <div class="alert alert-success d-flex justify-content-between">
-            <% success.forEach(success=> { %>
-              <%= success %><br>
-                <% }); %>
-                <button class="btn-close removeMessage"></button>
+      <div class="col-4 fixed-top-right">
+        <div class="row alertRow">
+          <div class="col my-3">
+            <div class="progress mx-1" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="height: 1px">
+              <div class="progress-bar bg-success"></div>
+            </div>
+            <div class="alert alert-success d-flex justify-content-between">
+              <% success.forEach(success=> { %>
+                <%= success %><br>
+                  <% }); %>
+                    <button class="btn-close removeMessage"></button>
+            </div>
           </div>
         </div>
       </div>

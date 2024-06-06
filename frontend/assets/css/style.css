@@ -1,0 +1,63 @@
+:root {
+    --bg-primary-color: rgb(240, 240, 240);
+    --bg-secondary-color: #fff;
+    --bg-color-nav: #141A21;
+    --font-color-footer: #9b9b9b;
+}
+
+.navMenu,
+.footer {
+    background-color: var(--bg-color-nav);
+}
+
+.footer {
+    color: var(--font-color-footer);
+}
+
+.fixed-top-right {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1050;
+}
+
+.primary-containers-home {
+    background-color: var(--bg-primary-color);
+    height: 50vh;
+}
+
+.secondary-containers-home {
+    background-color: var(--bg-secondary-color);
+}
+
+.div-login, .div-createTask, .div-editTask {
+    background-color: var(--bg-primary-color);
+}
+
+@media (min-width: 375px) {
+    .search-input {
+        width: 100%;
+    }
+
+    .first-container-home {
+        height: 80vh;
+    }
+}
+
+@media (min-width: 574px) {
+    .search-input {
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .search-input {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .search-input {
+        width: 25%;
+    }
+}

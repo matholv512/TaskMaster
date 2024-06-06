@@ -50,7 +50,6 @@ var FilterContent = /*#__PURE__*/function () {
         if (!selectedElement) return;
         if (e.target.classList.contains('filter-button')) {
           _this.filter(selectedElement);
-          document.dispatchEvent(new CustomEvent('filterApplied'));
         }
         if (e.target.classList.contains('removeFilter')) {
           e.target.remove();
@@ -85,7 +84,8 @@ var FilterContent = /*#__PURE__*/function () {
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var task = _step2.value;
-          if (element.value === 'lowPriority' && task.dataset.taskPriority === 'Baixa' || element.value === 'mediumPriority' && task.dataset.taskPriority === 'Média' || element.value === 'highPriority' && task.dataset.taskPriority === 'Alta' || element.value === 'default') {
+          if (element.value === 'default') return;
+          if (element.value === 'lowPriority' && task.dataset.taskPriority === 'Baixa' || element.value === 'mediumPriority' && task.dataset.taskPriority === 'Média' || element.value === 'highPriority' && task.dataset.taskPriority === 'Alta') {
             task.style.display = 'block';
             this.filteredTasks.push(task);
           } else {
@@ -97,6 +97,7 @@ var FilterContent = /*#__PURE__*/function () {
       } finally {
         _iterator2.f();
       }
+      document.dispatchEvent(new CustomEvent('filterApplied'));
     }
   }, {
     key: "createRemoveFilter",
@@ -335,6 +336,14 @@ var Pagination = /*#__PURE__*/function () {
     value: function events() {
       var _this = this;
       document.addEventListener('filterApplied', function () {
+        if (_this.searchFilter.getResearchedTasks()) {
+          _this.tasks = _this.filter.getResearchedTasks();
+          _this.numberOfPageLinks = Math.ceil(Number(_this.tasks.length / _this.itemsPerPage));
+          _this.index = 1;
+          _this.createPagination();
+          _this.filterContent();
+          return;
+        }
         _this.tasks = _this.filter.getFilteredTasks();
         _this.numberOfPageLinks = Math.ceil(Number(_this.tasks.length / _this.itemsPerPage));
         _this.index = 1;
@@ -465,6 +474,7 @@ var SearchFilter = /*#__PURE__*/function () {
     this.tasks = document.querySelectorAll('.list-group-item');
     this.filter = new _Filter__WEBPACK_IMPORTED_MODULE_0__["default"]();
     this.filter.init();
+    this.searchValue = null;
   }
   return _createClass(SearchFilter, [{
     key: "init",
@@ -473,8 +483,19 @@ var SearchFilter = /*#__PURE__*/function () {
       document.addEventListener('input', function (e) {
         var element = e.target;
         if (element.classList.contains('search-input')) {
-          _this.filterContent(element.value);
+          _this.searchValue = element.value;
+          _this.filterContent(_this.searchValue);
           document.dispatchEvent(new CustomEvent('searchFilterStart'));
+        }
+      });
+      document.addEventListener('filterRemoved', function () {
+        _this.searchInput = document.querySelector('.search-input');
+        _this.searchInput.value = null;
+        _this.searchValue = null;
+      });
+      document.addEventListener('filterApplied', function () {
+        if (_this.searchValue) {
+          _this.filterContent(_this.searchValue);
         }
       });
     }
@@ -482,42 +503,24 @@ var SearchFilter = /*#__PURE__*/function () {
     key: "filterContent",
     value: function filterContent(searchValue) {
       this.researchedTasks = [];
-      if (this.filter.getFilteredTasks()) {
-        var _iterator = _createForOfIteratorHelper(this.filter.getFilteredTasks()),
-          _step;
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var task = _step.value;
-            if (task.dataset.taskTitle.toLowerCase().includes(searchValue.toLowerCase())) {
-              task.style.display = 'block';
-              this.researchedTasks.push(task);
-            } else {
-              task.style.display = 'none';
-            }
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
-        return;
-      }
-      var _iterator2 = _createForOfIteratorHelper(this.tasks),
-        _step2;
+      var filteredTasks = this.filter.getFilteredTasks();
+      var tasksToFilter = filteredTasks ? filteredTasks : this.tasks;
+      var _iterator = _createForOfIteratorHelper(tasksToFilter),
+        _step;
       try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var _task = _step2.value;
-          if (_task.dataset.taskTitle.toLowerCase().includes(searchValue.toLowerCase())) {
-            _task.style.display = 'block';
-            this.researchedTasks.push(_task);
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var task = _step.value;
+          if (task.dataset.taskTitle.toLowerCase().includes(searchValue.toLowerCase())) {
+            task.style.display = 'block';
+            this.researchedTasks.push(task);
           } else {
-            _task.style.display = 'none';
+            task.style.display = 'none';
           }
         }
       } catch (err) {
-        _iterator2.e(err);
+        _iterator.e(err);
       } finally {
-        _iterator2.f();
+        _iterator.f();
       }
     }
   }, {
@@ -663,7 +666,69 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ``, "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, `:root {
+    --bg-primary-color: rgb(240, 240, 240);
+    --bg-secondary-color: #fff;
+    --bg-color-nav: #141A21;
+    --font-color-footer: #9b9b9b;
+}
+
+.navMenu,
+.footer {
+    background-color: var(--bg-color-nav);
+}
+
+.footer {
+    color: var(--font-color-footer);
+}
+
+.fixed-top-right {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1050;
+}
+
+.primary-containers-home {
+    background-color: var(--bg-primary-color);
+    height: 50vh;
+}
+
+.secondary-containers-home {
+    background-color: var(--bg-secondary-color);
+}
+
+.div-login, .div-createTask, .div-editTask {
+    background-color: var(--bg-primary-color);
+}
+
+@media (min-width: 375px) {
+    .search-input {
+        width: 100%;
+    }
+
+    .first-container-home {
+        height: 80vh;
+    }
+}
+
+@media (min-width: 574px) {
+    .search-input {
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .search-input {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .search-input {
+        width: 25%;
+    }
+}`, "",{"version":3,"sources":["webpack://./frontend/assets/css/style.css"],"names":[],"mappings":"AAAA;IACI,sCAAsC;IACtC,0BAA0B;IAC1B,uBAAuB;IACvB,4BAA4B;AAChC;;AAEA;;IAEI,qCAAqC;AACzC;;AAEA;IACI,+BAA+B;AACnC;;AAEA;IACI,eAAe;IACf,MAAM;IACN,QAAQ;IACR,aAAa;AACjB;;AAEA;IACI,yCAAyC;IACzC,YAAY;AAChB;;AAEA;IACI,2CAA2C;AAC/C;;AAEA;IACI,yCAAyC;AAC7C;;AAEA;IACI;QACI,WAAW;IACf;;IAEA;QACI,YAAY;IAChB;AACJ;;AAEA;IACI;QACI,WAAW;IACf;AACJ;;AAEA;IACI;QACI,WAAW;IACf;AACJ;;AAEA;IACI;QACI,UAAU;IACd;AACJ","sourcesContent":[":root {\r\n    --bg-primary-color: rgb(240, 240, 240);\r\n    --bg-secondary-color: #fff;\r\n    --bg-color-nav: #141A21;\r\n    --font-color-footer: #9b9b9b;\r\n}\r\n\r\n.navMenu,\r\n.footer {\r\n    background-color: var(--bg-color-nav);\r\n}\r\n\r\n.footer {\r\n    color: var(--font-color-footer);\r\n}\r\n\r\n.fixed-top-right {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    z-index: 1050;\r\n}\r\n\r\n.primary-containers-home {\r\n    background-color: var(--bg-primary-color);\r\n    height: 50vh;\r\n}\r\n\r\n.secondary-containers-home {\r\n    background-color: var(--bg-secondary-color);\r\n}\r\n\r\n.div-login, .div-createTask, .div-editTask {\r\n    background-color: var(--bg-primary-color);\r\n}\r\n\r\n@media (min-width: 375px) {\r\n    .search-input {\r\n        width: 100%;\r\n    }\r\n\r\n    .first-container-home {\r\n        height: 80vh;\r\n    }\r\n}\r\n\r\n@media (min-width: 574px) {\r\n    .search-input {\r\n        width: 100%;\r\n    }\r\n}\r\n\r\n@media (min-width: 992px) {\r\n    .search-input {\r\n        width: 100%;\r\n    }\r\n}\r\n\r\n@media (min-width: 1200px) {\r\n    .search-input {\r\n        width: 25%;\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
