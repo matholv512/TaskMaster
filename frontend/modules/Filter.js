@@ -24,7 +24,6 @@ export default class FilterContent {
             if (!selectedElement) return;
             if (e.target.classList.contains('filter-button')) {
                 this.filter(selectedElement);
-                document.dispatchEvent(new CustomEvent('filterApplied'));
             }
 
             if (e.target.classList.contains('removeFilter')) {
@@ -47,16 +46,18 @@ export default class FilterContent {
     filter(element) {
         this.filteredTasks = [];
         for (let task of this.tasks) {
+            if (element.value === 'default') return;
+
             if (element.value === 'lowPriority' && task.dataset.taskPriority === 'Baixa' ||
                 element.value === 'mediumPriority' && task.dataset.taskPriority === 'Média' ||
-                element.value === 'highPriority' && task.dataset.taskPriority === 'Alta' ||
-                element.value === 'default') {
+                element.value === 'highPriority' && task.dataset.taskPriority === 'Alta') {
                 task.style.display = 'block';
                 this.filteredTasks.push(task);
             } else {
                 task.style.display = 'none';
             }
         }
+        document.dispatchEvent(new CustomEvent('filterApplied'));
     }
 
     createRemoveFilter() {

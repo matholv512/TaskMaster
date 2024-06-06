@@ -26,6 +26,15 @@ export default class Pagination {
 
     events() {
         document.addEventListener('filterApplied', () => {
+            if (this.searchFilter.getResearchedTasks()) {
+                this.tasks = this.filter.getResearchedTasks();
+                this.numberOfPageLinks = Math.ceil(Number(this.tasks.length / this.itemsPerPage));
+                this.index = 1;
+                this.createPagination();
+                this.filterContent();
+                return;
+            }
+
             this.tasks = this.filter.getFilteredTasks();
             this.numberOfPageLinks = Math.ceil(Number(this.tasks.length / this.itemsPerPage));
             this.index = 1;
@@ -104,7 +113,7 @@ export default class Pagination {
     }
 
     clearPagination() {
-        while(this.pagination && (this.pagination.firstChild)) {
+        while (this.pagination && (this.pagination.firstChild)) {
             this.pagination.removeChild(this.pagination.firstChild);
         }
     }

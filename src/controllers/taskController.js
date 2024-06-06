@@ -52,7 +52,7 @@ exports.editTask = (req, res) => {
 
         req.flash('success', 'Tarefa Editada com sucesso.');
         req.session.save(() => {
-            return res.redirect('back');
+            return res.redirect('/');
         });
     } catch (e) {
         console.log(e);

@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const loginFormValidation = new LoginFormValidation();
     loginFormValidation.init();
-    
+
     const taskFormValidation = new TaskFormValidation();
     taskFormValidation.init();
-    
+
     const searchFilter = new SearchFilter();
     searchFilter.init();
 
