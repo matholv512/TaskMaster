@@ -14,13 +14,6 @@
     color: var(--font-color-footer);
 }
 
-.fixed-top-right {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1050;
-}
-
 .primary-containers-home {
     background-color: var(--bg-primary-color);
     height: 50vh;
@@ -30,8 +23,17 @@
     background-color: var(--bg-secondary-color);
 }
 
-.div-login, .div-createTask, .div-editTask {
+.div-login, .div-create-task, .div-editTask, .div-empty-tasks, .div-tasks, .modal-header, .modal-footer {
     background-color: var(--bg-primary-color);
+}
+
+.div-tasks span {
+    width: 50px; 
+    height: 20px;
+}
+
+textarea {
+    height: 200px;
 }
 
 @media (min-width: 375px) {
@@ -42,22 +44,46 @@
     .first-container-home {
         height: 80vh;
     }
+
+    .alertRow {
+        width: 100vw;
+    }
+
+    .fixed-top-right {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 2vw;
+        z-index: 1050;
+    }
 }
 
-@media (min-width: 574px) {
-    .search-input {
-        width: 100%;
+@media (min-width: 520px) {
+    .first-container-home {
+        height: 60vh;
     }
 }
 
 @media (min-width: 992px) {
-    .search-input {
-        width: 100%;
+    .alertRow {
+        width: 40vw;
+    }
+
+    .fixed-top-right {
+        left: 60vw;
     }
 }
 
 @media (min-width: 1200px) {
     .search-input {
         width: 25%;
+    }
+
+    .alertRow {
+        width: 30vw;
+    }
+
+    .fixed-top-right {
+        left: 70vw;
     }
 }

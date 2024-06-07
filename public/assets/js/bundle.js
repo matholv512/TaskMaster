@@ -627,14 +627,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ formatDate)
 /* harmony export */ });
 function formatDate() {
-  var dateField = document.querySelectorAll('.finalDate');
+  var dateField = document.querySelectorAll('.final-date');
   if (dateField) {
     dateField.forEach(function (val) {
       var date = val.textContent.split('-');
       var year = Number(date[0]);
-      var month = Number(date[1]);
+      var month = date[1];
       var time = date[2].split('T')[1];
-      var day = Number(date[2].split('T')[0]);
+      var day = date[2].split('T')[0];
       date = [day, month, year, time];
       date = date.join('/');
       var lastSlashIndex = date.lastIndexOf('/');
@@ -682,13 +682,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `:root {
     color: var(--font-color-footer);
 }
 
-.fixed-top-right {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 1050;
-}
-
 .primary-containers-home {
     background-color: var(--bg-primary-color);
     height: 50vh;
@@ -698,8 +691,17 @@ ___CSS_LOADER_EXPORT___.push([module.id, `:root {
     background-color: var(--bg-secondary-color);
 }
 
-.div-login, .div-createTask, .div-editTask {
+.div-login, .div-create-task, .div-editTask, .div-empty-tasks, .div-tasks, .modal-header, .modal-footer {
     background-color: var(--bg-primary-color);
+}
+
+.div-tasks span {
+    width: 50px; 
+    height: 20px;
+}
+
+textarea {
+    height: 200px;
 }
 
 @media (min-width: 375px) {
@@ -710,17 +712,33 @@ ___CSS_LOADER_EXPORT___.push([module.id, `:root {
     .first-container-home {
         height: 80vh;
     }
+
+    .alertRow {
+        width: 100vw;
+    }
+
+    .fixed-top-right {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 2vw;
+        z-index: 1050;
+    }
 }
 
-@media (min-width: 574px) {
-    .search-input {
-        width: 100%;
+@media (min-width: 520px) {
+    .first-container-home {
+        height: 60vh;
     }
 }
 
 @media (min-width: 992px) {
-    .search-input {
-        width: 100%;
+    .alertRow {
+        width: 40vw;
+    }
+
+    .fixed-top-right {
+        left: 60vw;
     }
 }
 
@@ -728,7 +746,15 @@ ___CSS_LOADER_EXPORT___.push([module.id, `:root {
     .search-input {
         width: 25%;
     }
-}`, "",{"version":3,"sources":["webpack://./frontend/assets/css/style.css"],"names":[],"mappings":"AAAA;IACI,sCAAsC;IACtC,0BAA0B;IAC1B,uBAAuB;IACvB,4BAA4B;AAChC;;AAEA;;IAEI,qCAAqC;AACzC;;AAEA;IACI,+BAA+B;AACnC;;AAEA;IACI,eAAe;IACf,MAAM;IACN,QAAQ;IACR,aAAa;AACjB;;AAEA;IACI,yCAAyC;IACzC,YAAY;AAChB;;AAEA;IACI,2CAA2C;AAC/C;;AAEA;IACI,yCAAyC;AAC7C;;AAEA;IACI;QACI,WAAW;IACf;;IAEA;QACI,YAAY;IAChB;AACJ;;AAEA;IACI;QACI,WAAW;IACf;AACJ;;AAEA;IACI;QACI,WAAW;IACf;AACJ;;AAEA;IACI;QACI,UAAU;IACd;AACJ","sourcesContent":[":root {\r\n    --bg-primary-color: rgb(240, 240, 240);\r\n    --bg-secondary-color: #fff;\r\n    --bg-color-nav: #141A21;\r\n    --font-color-footer: #9b9b9b;\r\n}\r\n\r\n.navMenu,\r\n.footer {\r\n    background-color: var(--bg-color-nav);\r\n}\r\n\r\n.footer {\r\n    color: var(--font-color-footer);\r\n}\r\n\r\n.fixed-top-right {\r\n    position: fixed;\r\n    top: 0;\r\n    right: 0;\r\n    z-index: 1050;\r\n}\r\n\r\n.primary-containers-home {\r\n    background-color: var(--bg-primary-color);\r\n    height: 50vh;\r\n}\r\n\r\n.secondary-containers-home {\r\n    background-color: var(--bg-secondary-color);\r\n}\r\n\r\n.div-login, .div-createTask, .div-editTask {\r\n    background-color: var(--bg-primary-color);\r\n}\r\n\r\n@media (min-width: 375px) {\r\n    .search-input {\r\n        width: 100%;\r\n    }\r\n\r\n    .first-container-home {\r\n        height: 80vh;\r\n    }\r\n}\r\n\r\n@media (min-width: 574px) {\r\n    .search-input {\r\n        width: 100%;\r\n    }\r\n}\r\n\r\n@media (min-width: 992px) {\r\n    .search-input {\r\n        width: 100%;\r\n    }\r\n}\r\n\r\n@media (min-width: 1200px) {\r\n    .search-input {\r\n        width: 25%;\r\n    }\r\n}"],"sourceRoot":""}]);
+
+    .alertRow {
+        width: 30vw;
+    }
+
+    .fixed-top-right {
+        left: 70vw;
+    }
+}`, "",{"version":3,"sources":["webpack://./frontend/assets/css/style.css"],"names":[],"mappings":"AAAA;IACI,sCAAsC;IACtC,0BAA0B;IAC1B,uBAAuB;IACvB,4BAA4B;AAChC;;AAEA;;IAEI,qCAAqC;AACzC;;AAEA;IACI,+BAA+B;AACnC;;AAEA;IACI,yCAAyC;IACzC,YAAY;AAChB;;AAEA;IACI,2CAA2C;AAC/C;;AAEA;IACI,yCAAyC;AAC7C;;AAEA;IACI,WAAW;IACX,YAAY;AAChB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI;QACI,WAAW;IACf;;IAEA;QACI,YAAY;IAChB;;IAEA;QACI,YAAY;IAChB;;IAEA;QACI,eAAe;QACf,MAAM;QACN,QAAQ;QACR,SAAS;QACT,aAAa;IACjB;AACJ;;AAEA;IACI;QACI,YAAY;IAChB;AACJ;;AAEA;IACI;QACI,WAAW;IACf;;IAEA;QACI,UAAU;IACd;AACJ;;AAEA;IACI;QACI,UAAU;IACd;;IAEA;QACI,WAAW;IACf;;IAEA;QACI,UAAU;IACd;AACJ","sourcesContent":[":root {\r\n    --bg-primary-color: rgb(240, 240, 240);\r\n    --bg-secondary-color: #fff;\r\n    --bg-color-nav: #141A21;\r\n    --font-color-footer: #9b9b9b;\r\n}\r\n\r\n.navMenu,\r\n.footer {\r\n    background-color: var(--bg-color-nav);\r\n}\r\n\r\n.footer {\r\n    color: var(--font-color-footer);\r\n}\r\n\r\n.primary-containers-home {\r\n    background-color: var(--bg-primary-color);\r\n    height: 50vh;\r\n}\r\n\r\n.secondary-containers-home {\r\n    background-color: var(--bg-secondary-color);\r\n}\r\n\r\n.div-login, .div-create-task, .div-editTask, .div-empty-tasks, .div-tasks, .modal-header, .modal-footer {\r\n    background-color: var(--bg-primary-color);\r\n}\r\n\r\n.div-tasks span {\r\n    width: 50px; \r\n    height: 20px;\r\n}\r\n\r\ntextarea {\r\n    height: 200px;\r\n}\r\n\r\n@media (min-width: 375px) {\r\n    .search-input {\r\n        width: 100%;\r\n    }\r\n\r\n    .first-container-home {\r\n        height: 80vh;\r\n    }\r\n\r\n    .alertRow {\r\n        width: 100vw;\r\n    }\r\n\r\n    .fixed-top-right {\r\n        position: fixed;\r\n        top: 0;\r\n        right: 0;\r\n        left: 2vw;\r\n        z-index: 1050;\r\n    }\r\n}\r\n\r\n@media (min-width: 520px) {\r\n    .first-container-home {\r\n        height: 60vh;\r\n    }\r\n}\r\n\r\n@media (min-width: 992px) {\r\n    .alertRow {\r\n        width: 40vw;\r\n    }\r\n\r\n    .fixed-top-right {\r\n        left: 60vw;\r\n    }\r\n}\r\n\r\n@media (min-width: 1200px) {\r\n    .search-input {\r\n        width: 25%;\r\n    }\r\n\r\n    .alertRow {\r\n        width: 30vw;\r\n    }\r\n\r\n    .fixed-top-right {\r\n        left: 70vw;\r\n    }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

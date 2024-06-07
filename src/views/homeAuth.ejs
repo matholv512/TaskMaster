@@ -2,7 +2,7 @@
     <%- include('includes/nav'); %>
         <div class="container min-vh-100">
             <%- include('includes/messages') %>
-                <div class="col-12 border rounded mt-4 p-3">
+                <div class="col-12 border rounded mt-5 p-3">
                     <% if (currentHour>= 6 && currentHour <= 12) { %>
                             <h5 class="card-text"><span class="text-secondary">Bom dia,</span class="username">
                                 <%= user && user.username %>.
@@ -28,8 +28,8 @@
                             <% if (tasks.length> 0) { %>
                                 <h1 class="text-center my-3">Lista de Tarefas</h1>
                                 <div class="d-flex justify-content-end">
-                                    <input type="text" class="search-input form-control me-1"
-                                        placeholder="Pesquisar" name="search">
+                                    <input type="text" class="search-input form-control me-1" placeholder="Pesquisar"
+                                        name="search">
                                     <%- include('includes/filter'); %>
                                 </div>
                                 <% } %>
@@ -41,8 +41,7 @@
 
                                 <% if (tasks.length> 0) { %>
                                     <% for (let task of tasks) { %>
-                                        <div class="list-group my-1 border min-vh-100 px-0 py-0"
-                                            style="background-color: rgb(247, 247, 247);">
+                                        <div class="list-group my-1 border min-vh-100 px-0 py-0 div-tasks">
                                             <a href='/edit_task/<%= task._id %>'
                                                 class="list-group-item list-group-item-action" aria-current="true"
                                                 data-task-id="<%= task.id %>" data-task-title="<%= task.title %>"
@@ -55,25 +54,22 @@
                                                     <div class="d-flex justify-content-end">
                                                         <% if (task.priority==='Baixa' ) { %>
                                                             <small class="mx-2"><span
-                                                                    class="badge text-bg-success rounded-pill"
-                                                                    style="width: 50px; height: 20px;">
+                                                                    class="badge text-bg-success rounded-pill">
                                                                     <%= task.priority %>
                                                                 </span></small>
                                                             <% } else if (task.priority==='Média' ) { %>
                                                                 <small class="mx-2"><span
-                                                                        class="badge text-bg-warning rounded-pill"
-                                                                        style="width: 50px; height: 20px;">
+                                                                        class="badge text-bg-warning rounded-pill">
                                                                         <%= task.priority %>
                                                                     </span></small>
                                                                 <% } else { %>
                                                                     <small class="mx-2"><span
-                                                                            class="badge text-bg-danger rounded-pill"
-                                                                            style="width: 50px; height: 20px;">
+                                                                            class="badge text-bg-danger rounded-pill">
                                                                             <%= task.priority %>
                                                                         </span></small>
                                                                     <% } %>
                                                     </div>
-                                                    <small class="finalDate">
+                                                    <small class="final-date">
                                                         <%= task.finalDate %>
                                                     </small>
                                                 </div>
@@ -81,12 +77,11 @@
                                         </div>
                                         <% } %>
                                             <% } else { %>
-                                                <div class="border rounded p-4"
-                                                    style="background-color: rgb(247, 247, 247);">
+                                                <div class="border rounded p-4 div-empty-tasks">
                                                     <h1 class="text-center">Você ainda não possui nenhuma tarefa.</h1>
                                                     <div class="d-flex justify-content-center mt-3">
                                                         <a href="/create_task"><button type="button"
-                                                                class="btn btn-primary">Criar</button></a>
+                                                                class="btn btn-primary btn-lg">Criar</button></a>
                                                     </div>
                                                 </div>
                                                 <% } %>
