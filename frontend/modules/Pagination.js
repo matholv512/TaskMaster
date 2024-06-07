@@ -27,7 +27,7 @@ export default class Pagination {
     events() {
         document.addEventListener('filterApplied', () => {
             if (this.searchFilter.getResearchedTasks()) {
-                this.tasks = this.filter.getResearchedTasks();
+                this.tasks = this.searchFilter.getResearchedTasks();
                 this.numberOfPageLinks = Math.ceil(Number(this.tasks.length / this.itemsPerPage));
                 this.index = 1;
                 this.createPagination();

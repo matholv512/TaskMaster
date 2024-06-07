@@ -337,7 +337,7 @@ var Pagination = /*#__PURE__*/function () {
       var _this = this;
       document.addEventListener('filterApplied', function () {
         if (_this.searchFilter.getResearchedTasks()) {
-          _this.tasks = _this.filter.getResearchedTasks();
+          _this.tasks = _this.searchFilter.getResearchedTasks();
           _this.numberOfPageLinks = Math.ceil(Number(_this.tasks.length / _this.itemsPerPage));
           _this.index = 1;
           _this.createPagination();
