@@ -23,7 +23,7 @@
 
 # 📁 Acesso ao projeto
 
-**Você pode <a href="https://github.com/matholv512/TaskMaster">acessar o código fonte do projeto</a> ou [baixá-lo](https://github.com/user-attachments/files/15587124/TaskMaster-main.zip).**
+**Você pode acessar ao TaskMaster clicando <a href="https://task-master-chi.vercel.app/">aqui</a>. Também é possível <a href="https://github.com/matholv512/TaskMaster">acessar o código fonte do projeto</a> ou [baixá-lo](https://github.com/user-attachments/files/15587124/TaskMaster-main.zip).**
 
 # 🛠️ Abrir e rodar o projeto
 <p>Após baixar o projeto, abra com o Visual Studio Code.</p>
