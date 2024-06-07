@@ -7,6 +7,7 @@ exports.globalMiddleware = (req, res, next) => {
 
 exports.checkCsrfError = (err, req, res, next) => {
     if (err) {
+        console.error(err.stack);
         return res.status(500).render('errorPage');
     }
     next();
